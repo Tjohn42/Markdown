@@ -77,3 +77,5 @@ It should be noted that the ITSM module needs to be installed on Eyes of Network
 
 [7] Exploit Fix https://github.com/EyesOfNetworkCommunity/eonweb/commit/6d1be13ba36fedfc8cdcbe9c30e99d4e0ca7db1b?fbclid=IwAR0X3qOSDuq1Ke_uAHDjKriPMAfSDWhi4IU6QZWKTuo-Zj4R1sV_TG7hPTo#
 
+[8] NIST Vulnerbility https://nvd.nist.gov/vuln/detail/CVE-2021-27514
+
