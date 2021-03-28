@@ -1,3 +1,34 @@
+# (CVE-2021-27514) **Authentication bypass with SessionID brute forcing**
+
+## What software contains the vulnerability?
+The vulnerability is found in version 5.3 of a program called EyesofNetwork.
+## What is the vulnerability?
+The program allows the sessionID to be brute-forced without an eventual timeout or cooldown to prevent excessive authentication attempts. To make brute-forcing even easier, the SessionID is ALWAYS between 8-10 numerical digits in length.
+
+## What is EyesofNetwork?
+Eyes of Network is a program designed to assist in the management of an information system. The software is designed to make use of the IT Infrastructure library process and pair it with a GUI in order to allow businesses to manage their networks, applications, commerce, data, updates, and monitor their business statistics.
+## When was the exploit discovered?
+**February 21st 2021**
+## When was the exploit patched?
+**March 12th 2021**
+## How was it fixed?
+The patch changed the table structure and changed the sessionID from 8-10 numerical digits to a higher number of alphanumeric char values.
+
+## What is Brute-forcing?    
+-   Brute forcing is when an attacker uses some sort of semi or fully automated program in order to try several entries until the desired value for the situation at hand is found. The method is most commonly used to obtain a password or in our case a sessionID
+
+- Brute forcing can work in 3 main ways:
+	- The program can try random values within parameters
+	
+	- The program can try to check values from a word list like what we all did in this very class if you used a brute force style program for assignment 4 like john the ripper
+	- Or lastly or what we will demonstrate today they can follow a continuous pattern or increment value
+
+## What is a sessionID?
+-   A sessionID is a unique identifier assigned to a user upon login and represents the open session. The SessionID essentially tells the program that the system logged in is being used by the user associated with the ID.
+    
+-   The sessionId which was mentioned thought the presentation is the main point of concern for this vulnerability as it was too short with too low of a complexity
+    
+-   It is commonly accepted that most session IDs should be a minimum of 128 bits in length in order to combat the aforementioned brute force attacks.
 #  How the Exploit Works
 The Eyes of Network has a vulnerability in version 5.10 that has a session ID between 8 and 10 digits. This is done using a brute force method, meaning that you would start searching using session ID 10000000 and iterate up to 9999999999. This can be seen in this code: 
 
@@ -78,4 +109,7 @@ It should be noted that the ITSM module needs to be installed on Eyes of Network
 [7] Exploit Fix https://github.com/EyesOfNetworkCommunity/eonweb/commit/6d1be13ba36fedfc8cdcbe9c30e99d4e0ca7db1b?fbclid=IwAR0X3qOSDuq1Ke_uAHDjKriPMAfSDWhi4IU6QZWKTuo-Zj4R1sV_TG7hPTo#
 
 [8] NIST Vulnerbility https://nvd.nist.gov/vuln/detail/CVE-2021-27514
+
+[9] SessionID Length https://owasp.org/www-community/vulnerabilities/Insufficient_Session-ID_Length#:~:text=Description,brute%2Dforce%20session%20guessing%20attacks.
+
 
