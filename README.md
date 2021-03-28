@@ -1,7 +1,10 @@
 # (CVE-2021-27514) **Authentication bypass with SessionID brute forcing**
 
+![image](https://user-images.githubusercontent.com/71412992/112759163-c87b9580-8fbf-11eb-9c2b-63b40c097450.png)
+
+
 ## What software contains the vulnerability?
-The vulnerability is found in version 5.3 of a program called EyesofNetwork.
+The vulnerability is found in version 5.3.10 of a program called EyesofNetwork.
 ## What is the vulnerability?
 The program allows the sessionID to be brute-forced without an eventual timeout or cooldown to prevent excessive authentication attempts. To make brute-forcing even easier, the SessionID is ALWAYS between 8-10 numerical digits in length.
 
@@ -13,6 +16,9 @@ Eyes of Network is a program designed to assist in the management of an informat
 **March 12th 2021**
 ## How was it fixed?
 The patch changed the table structure and changed the sessionID from 8-10 numerical digits to a higher number of alphanumeric char values.
+
+![image](https://user-images.githubusercontent.com/71412992/112759186-e3e6a080-8fbf-11eb-9f1d-aadae4fcaa82.png)
+
 
 ## What is Brute-forcing?    
 -   Brute forcing is when an attacker uses some sort of semi or fully automated program in order to try several entries until the desired value for the situation at hand is found. The method is most commonly used to obtain a password or in our case a sessionID
@@ -30,7 +36,7 @@ The patch changed the table structure and changed the sessionID from 8-10 numeri
     
 -   It is commonly accepted that most session IDs should be a minimum of 128 bits in length in order to combat the aforementioned brute force attacks.
 #  How the Exploit Works
-The Eyes of Network has a vulnerability in version 5.10 that has a session ID between 8 and 10 digits. This is done using a brute force method, meaning that you would start searching using session ID 10000000 and iterate up to 9999999999. This can be seen in this code: 
+The Eyes of Network has a vulnerability in version 5.3.10 that has a session ID between 8 and 10 digits. This is done using a brute force method, meaning that you would start searching using session ID 10000000 and iterate up to 9999999999. This can be seen in this code: 
 
 ```python
     if rep.content.find(bytes) !=-1:
