@@ -61,6 +61,8 @@ You will need to fill in all of these fields and put in the session ID that was 
 
 Once the fields are filled out properly, you refresh the cookies and then the page and you will now be on the main dashboard page of the site with the same access as the user whos session ID you used. 
 
+[[Using the Session ID Demo from Presentation]](https://drive.google.com/file/d/1A_G3z7hrUq75NR4OheF2wnromBJ7sS3C/view?usp=sharing)
+
 ## Privilege Escalation 
 This exploit involves allowing a restricted user to gain access to an admin account. Once a user has logged in, (This can be done using the session ID or with real credentials if the user has access to the site) this user will navigate to the profile tab on the eyes of network portal. Once here they have to option to change their password. The put in and password they would like. 
 
@@ -69,6 +71,8 @@ Next using a proxy interrupter, they interrupt the POST request to change the pa
 ![image](https://user-images.githubusercontent.com/71412992/112727172-8424c280-8ef7-11eb-8abf-9956d3f645e6.png)
 
 Using the Admin session ID, user_name,user_id, group_id the user is able to change the password of the admin immediately and now has access to that account through regular log in. 
+
+[[Password Changing Demo from Presentation]](https://drive.google.com/file/d/1GRRtUvGUUZJ2lrjAFSqca7R0ionQawjJ/view?usp=sharing)
 
 ## Root Access to Eyes of Network OS (CentOS)
 The last vulnerability that we explored with this exploit was gaining root access on the Eyes of Network operating system. This vulnerability could result in massive loss of data and destruction.  The following code will POST a .php file disguised as a .XML file to a directory on system. A GET request is then called on that file which will cause it to execute: 
@@ -97,6 +101,7 @@ Moving to the /tmp directory you are then able to do a os.execute in order to es
 
 It should be noted that the ITSM module needs to be installed on Eyes of Network for this portion of the explot to work as this is what allows XML upload. 
 
+[[Root access Demo from Presentation]](https://drive.google.com/file/d/1GBS82gYbQtkcr-ZRlcMSsL4OxX7ymtoB/view?usp=sharing)
 
 ## References 
 
